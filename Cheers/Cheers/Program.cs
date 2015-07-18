@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Cheers
 {
@@ -12,14 +13,27 @@ namespace Cheers
 			Console.WriteLine ("Your name, please?");
 			string name = Console.ReadLine ();
 			Console.WriteLine ("And your birthday? MM/DD please!");
-			string DOB = Console.ReadLine ();
 
+			// sanitize input by matching against a regex
+			string DOB = "";
+			Regex regex = new Regex ("^(0?[1-9]|1[0-2])/(0?[1-9]|[12][0-9]|3[01])$");
+			Match DOBgetwas;
+			do 
+			{
+				DOB = Console.ReadLine ();
+				DOBgetwas = regex.Match (DOB);
+				if (!DOBgetwas.Success) {
+					Console.WriteLine ("Please try that input again! MM/DD Please!");
+				}
+			} while (!DOBgetwas.Success);
+
+			Console.WriteLine("\n");
 			foreach (char c in name)
 			{
 				Console.WriteLine(Cheer (c));
 			}
-			Console.WriteLine(name.ToUpper() + " is.. GRAND!");
-			//Console.WriteLine ("\n");
+
+			Console.WriteLine(name.ToUpper() + " is.. GRAND!\n");
 			Console.WriteLine(BDayLine (DOB));
 		}
 
@@ -34,22 +48,15 @@ namespace Cheers
 		{
 			DateTime bday = makeBdayDateTime (DOB);
 			int difference =  bday.DayOfYear - DateTime.Today.DayOfYear;
-			string days;
-			if (difference > 0) {
+			string days = "";
+			if (difference == 0) {
+				return "Happy Birthday!!";
+			} else if (difference > 0) {
 				days = difference.ToString ();
 			} else if (difference < 0) {
 				days = (365 + difference).ToString ();
-			} else {
-				days = "Something has gone horribly wrong.";
 			}
 			return "Your birthday is " + days + " days away!";
-		}
-
-		private static bool isBirthday (DateTime bday)
-		{
-			if (bday.DayOfYear == DateTime.Today.DayOfYear)
-				return true;
-			return false;
 		}
 
 		private static DateTime makeBdayDateTime (string DOB)
