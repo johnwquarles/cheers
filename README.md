@@ -25,7 +25,7 @@ BOB is.. GRAND!
 ### What to Implement
 1. After your user enters their name, your program should ask for their birthdate.
 2. After the cheer, your program should tell the user how many more days there are until their next birthday.
-  - The user should only have to under the Day and Month
+  - The user should only have to enter the Day and Month
 
 THe final version of your app should work like the following:
 
@@ -41,10 +41,10 @@ Give me an.. o
 Give me a.. b
 BOB is.. GRAND!
 
-Your today is _____ days away!
+Your birthday is _____ days away!
 ```
 
-If the person's birthday is that day your program should say:
+If the person's birthday is that day, your program should say:
 
 ```shell
 Happy Birthday!!
