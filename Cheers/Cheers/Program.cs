@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Cheers
 {
 	class MainClass
 	{
-		static List<char> an_letters = new List<char> (new char[] { 'a', 'e', 'f', 'h', 'i', 'l', 'm', 'n', 'o', 'r', 's', 'x' });
-
+		static string an_letters = "halfnorsemix";
 		public static void Main (string[] args)
 		{
 			Console.WriteLine ("Your name, please?");
@@ -40,7 +40,7 @@ namespace Cheers
 		private static string Cheer (char c)
 		{
 			string article;
-			article = (an_letters.Contains (Char.ToUpper(c)) || an_letters.Contains(Char.ToLower(c))) ? "an" : "a";
+			article = (an_letters.Contains(Char.ToLower(c))) ? "an" : "a";
 			return "Give me " + article + ".. " + c;
 		}
 			
